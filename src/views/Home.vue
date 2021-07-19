@@ -1,8 +1,7 @@
 <template>
 	<div class="home">
-		<img alt="Vue logo" src="../assets/logo.png" />
 		<BlogPost :post="welcomeScreen" />
-		<BlogPost v-for="(post, index) in samplesBlogPosts" :key="index"/>
+		<BlogPost v-for="(post, index) in samplesBlogPosts" :post="post" :key="index"/>
 	</div>
 </template>
 
@@ -26,12 +25,12 @@ export default {
 				{
 					title: "This is a Filter Title",
 					blogHTML: "This is a filter blog post title!",
-					blogCoverPhoto: "beatiful-stories",
+					blogCoverPhoto: "beautiful-stories",
 				},
 				{
 					title: "This is a Filter Title",
 					blogHTML: "This is a filter blog post title!",
-					blogCoverPhoto: "beatiful-stories",
+					blogCoverPhoto: "beautiful-stories",
 				}
 			],
 			samplesBlogCards: [
