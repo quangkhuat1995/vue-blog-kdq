@@ -1,9 +1,9 @@
 <template>
 	<div class="app-wrapper">
 		<div class="app">
-			<Navigation />
+			<Navigation v-if="!hideNavigation"/>
 				<router-view />
-			<Footer />
+			<Footer v-if="!hideNavigation"/>
 		</div>
 	</div>
 </template>
@@ -19,12 +19,27 @@ export default {
 		Footer,
 	},
 	data() {
-		return {};
+		return {
+			hideNavigation: null,
+		};
 	},
-	created() {},
+	created() {
+		this.checkRoute()
+	},
 	mounted() {},
-	methods: {},
-	watch: {},
+	methods: {
+		checkRoute() {
+			if (this.$route.name === "Login" || this.$route.name === "Register" || this.$route.name === "ForgotPassword") {
+				return this.hideNavigation = true
+			}
+			return this.hideNavigation = false
+		}
+	},
+	watch: {
+		$route() {
+			this.checkRoute()
+		}
+	},
 };
 </script>
 
