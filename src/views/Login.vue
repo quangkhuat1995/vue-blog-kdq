@@ -97,16 +97,16 @@ export default {
 			align-items: center;
 			flex: 1;
 			@media (min-width: 900px) {
-				font-style: 40px;
+				font-size: 40px;
 			}
 
 			h2 {
 				text-align: center;
-				font-style: 23px;
+				font-size: 23px;
 				color: #303030;
 				margin-bottom: 40px;
 				@media (min-width: 900px) {
-					font-style: 40px;
+					font-size: 40px;
 				}
 			}
 
@@ -144,7 +144,7 @@ export default {
 				text-decoration: none;
 				color: #000;
 				cursor: pointer;
-				font-style: 14px;
+				font-size: 14px;
 				margin: 16px 0 32px;
 				border-bottom: 1px solid transparent;
 				transition: 0.5s ease all;

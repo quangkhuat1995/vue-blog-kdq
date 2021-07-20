@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<BlogPost :post="welcomeScreen" />
+		<BlogPost v-if="!user" :post="welcomeScreen" />
 		<BlogPost v-for="(post, index) in samplesBlogPosts" :post="post" :key="index"/>
 		<div class="blog-card-wrap">
 			<div>View More Recent Blogs</div>
@@ -8,7 +8,7 @@
 				<BlogCard v-for="(post, index) in samplesBlogCards" :key="index" :post="post"/>
 			</div>
 		</div>
-		<div class="updates">
+		<div v-if="!user" class="updates">
 			<div class="container">
 				<h2>Never miss a post. Register to your free account today</h2>
 				<router-link class="router-button" to="#">
@@ -56,6 +56,9 @@ export default {
 	computed: {
 		samplesBlogCards() {
 			return this.$store.state.samplesBlogCards
+		},
+		user() {
+			return this.$store.state.user
 		}
 	}
 };
@@ -64,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 	.blog-card-wrap {
 		font-weight: 300;
-		font-style: 28px;
+		font-size: 28px;
 		margin-bottom: 32px;
 	}
 
@@ -81,7 +84,7 @@ export default {
 
 			.router-button {
 				display: flex;
-				font-style: 14px;
+				font-size: 14px;
 				text-decoration: none;
 				@media (min-width: 800px) {
 					margin-left: auto;
@@ -90,14 +93,14 @@ export default {
 
 			h2 {
 				font-weight: 500;
-				font-style: 32px;
+				font-size: 32px;
 				max-width: 425px;
 				width: 100%;
 				text-align: center;
 				text-transform: uppercase;
 				@media (min-width: 800px) {
 					text-align: initial;
-					font-style: 40px;
+					font-size: 40px;
 				}
 			}
 		}
