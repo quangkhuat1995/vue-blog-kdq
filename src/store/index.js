@@ -8,6 +8,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		blogHTML: 'Write your blog title here...',
+		blogTitle: '',
+		blogPhotoName: '',
+		blogPhotoFileURL: null,
+		blogPhotoPreview: false,
 		editPost: false,
 		samplesBlogCards: [
 			{ blogTitle: 'Blog Card Title#1', blogCoverPhoto: 'stock-1', blogDate: 'May 1, 2021' },
@@ -25,6 +30,21 @@ export default new Vuex.Store({
 		profileInitials: null,
 	},
 	mutations: {
+		newBlogPost(state, payload) {
+			state.blogHTML = payload;
+		},
+		updateBlogTitle(state, payload) {
+			state.blogTitle = payload;
+		},
+		fileNameChange(state, payload) {
+			state.blogPhotoName = payload;
+		},
+		createFileURL(state, payload) {
+			state.blogPhotoFileURL = payload;
+		},
+		openPhotoPreview(state) {
+			state.blogPhotoPreview = !state.blogPhotoPreview;
+		},
 		toggleEditPost(state, payload) {
 			state.editPost = payload;
 		},

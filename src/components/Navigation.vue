@@ -8,7 +8,7 @@
 				<ul v-show="!mobileNav">
 					<router-link class="link" :to="{ name: 'Home' }">Home</router-link>
 					<router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-					<router-link class="link" :to="{ name: 'Home' }">Create Post</router-link>
+					<router-link class="link" :to="{ name: 'CreatePost' }">Create Post</router-link>
 					<router-link v-if="!user" class="link" :to="{ name: 'Login' }">Login/Register</router-link>
 				</ul>
 				<div v-if="user" @click="toggleProfileMenu" class="profile" ref="profile">
@@ -49,7 +49,7 @@
 			<ul class="mobile-nav" v-show="mobileNav">
 				<router-link class="link" :to="{ name: 'Home' }">Home</router-link>
 				<router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-				<router-link class="link" :to="{ name: 'Home' }">Create Post</router-link>
+				<router-link class="link" :to="{ name: 'CreatePost' }">Create Post</router-link>
 				<router-link v-if="!user" class="link" :to="{ name: 'Login' }">Login/Register</router-link>
 			</ul>
 		</transition>
@@ -180,6 +180,7 @@ header {
 				border-radius: 50%;
 				color: #fff;
 				background-color: #303030;
+				right: 0;
 
 				span {
 					pointer-events: none;
@@ -189,7 +190,7 @@ header {
 					position: absolute;
 					top: 60px;
 					right: 0;
-					width: 250px;
+					width: 300px;
 					background-color: #303030;
 					box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
