@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import Home from '../views/Home.vue';
 import Blogs from '../views/Blogs.vue';
 import Login from '../views/Login.vue';
@@ -21,6 +23,7 @@ const routes = [
 		component: Home,
 		meta: {
 			title: 'Home',
+			requiresAuth: false,
 		},
 	},
 	{
@@ -29,6 +32,7 @@ const routes = [
 		component: Blogs,
 		meta: {
 			title: 'Blogs',
+			requiresAuth: false,
 		},
 	},
 	{
@@ -37,6 +41,7 @@ const routes = [
 		component: Login,
 		meta: {
 			title: 'Login',
+			requiresAuth: false,
 		},
 	},
 	{
@@ -45,6 +50,7 @@ const routes = [
 		component: Register,
 		meta: {
 			title: 'Register',
+			requiresAuth: false,
 		},
 	},
 	{
@@ -53,6 +59,7 @@ const routes = [
 		component: ForgotPassword,
 		meta: {
 			title: 'ForgotPassword',
+			requiresAuth: false,
 		},
 	},
 	{
@@ -61,6 +68,7 @@ const routes = [
 		component: Profile,
 		meta: {
 			title: 'Profile',
+			requiresAuth: true,
 		},
 	},
 	{
@@ -69,6 +77,8 @@ const routes = [
 		component: Admin,
 		meta: {
 			title: 'Admin',
+			requiresAuth: true,
+			requiresAdmin: true,
 		},
 	},
 	{
@@ -77,6 +87,8 @@ const routes = [
 		component: CreatePost,
 		meta: {
 			title: 'Create Post',
+			requiresAuth: true,
+			requiresAdmin: true,
 		},
 	},
 	{
@@ -85,6 +97,8 @@ const routes = [
 		component: BlogPreview,
 		meta: {
 			title: 'Preview',
+			requiresAuth: true,
+			requiresAdmin: true,
 		},
 	},
 	{
@@ -93,6 +107,7 @@ const routes = [
 		component: ViewBlog,
 		meta: {
 			title: 'View Blog',
+			requiresAuth: false,
 		},
 	},
 	{
@@ -101,6 +116,8 @@ const routes = [
 		component: EditBlog,
 		meta: {
 			title: 'Edit Blog',
+			requiresAuth: true,
+			requiresAdmin: true,
 		},
 	},
 ];
@@ -114,6 +131,30 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
 	document.title = `${to.meta.title} | KDQ BLog`;
 	next();
+});
+router.beforeEach(async (to, from, next) => {
+	let user = firebase.auth().currentUser;
+	// let admin = null;
+	if (user) {
+		let token = await user.getIdTokenResult();
+		console.log('🚀 token', token);
+		// admin = token.claims.admin;
+	}
+	return next();
+
+	// if (to.matched.some(res => res.meta.requiresAuth)) {
+	// 	if (user) {
+	// 		if (to.matched.some(res => res.meta.requiresAdmin)) {
+	// 			if (admin) {
+	// 				return next();
+	// 			}
+	// 			return next({ name: 'Home' });
+	// 		}
+	// 		return next();
+	// 	}
+	// 	return next({ name: 'Home' });
+	// }
+	// return next();
 });
 
 export default router;
