@@ -52,6 +52,15 @@ export default new Vuex.Store({
 		toggleEditPost(state, payload) {
 			state.editPost = payload;
 		},
+		setBlogState(state, payload) {
+			state.blogTitle = payload.blogTitle;
+			state.blogHTML = payload.blogHTML;
+			state.blogPhotoFileURL = payload.blogCoverPhoto;
+			state.blogPhotoName = payload.blogCoverPhotoName;
+		},
+		filterBlogPost(state, payload) {
+			state.blogPosts = state.blogPosts.filter(post => post.blogId !== payload);
+		},
 		updateUser(state, payload) {
 			state.user = payload;
 		},
@@ -93,6 +102,7 @@ export default new Vuex.Store({
 						blogId: doc.data().blogId,
 						blogHTML: doc.data().blogHTML,
 						blogCoverPhoto: doc.data().blogCoverPhoto,
+						blogCoverPhotoName: doc.data().blogCoverPhotoName,
 						blogTitle: doc.data().blogTitle,
 						blogDate: doc.data().date,
 					};
@@ -100,6 +110,10 @@ export default new Vuex.Store({
 				}
 			});
 			state.postLoaded = true;
+		},
+		async updatePost({ commit, dispatch }, payload) {
+			commit('filterBlogPost', payload);
+			await dispatch('getPost');
 		},
 		async updateUserSettings({ commit, state }) {
 			const dataBase = await db.collection('users').doc(state.profileId);
@@ -109,6 +123,11 @@ export default new Vuex.Store({
 				username: state.profileUsername,
 			});
 			commit('setProfileInitials');
+		},
+		async deletePost({ commit }, payload) {
+			const getPost = await db.collection('blogPost').doc(payload);
+			await getPost.delete();
+			commit('filterBlogPost', payload);
 		},
 	},
 	modules: {},
