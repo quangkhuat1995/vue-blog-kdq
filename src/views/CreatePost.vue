@@ -136,7 +136,7 @@ export default {
 			return this.$store.state.profileId
 		},
 		blogCoverPhotoName() {
-			return this.$store.state.blogPhoteName
+			return this.$store.state.blogPhotoName
 		},
 		blogTitle: {
 			get() {
