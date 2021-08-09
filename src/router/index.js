@@ -87,7 +87,7 @@ const routes = [
 		},
 	},
 	{
-		path: '/view-blog',
+		path: '/view-blog/:blogId',
 		name: 'ViewBlog',
 		component: ViewBlog,
 		meta: {

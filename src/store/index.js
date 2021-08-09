@@ -94,13 +94,12 @@ export default new Vuex.Store({
 						blogHTML: doc.data().blogHTML,
 						blogCoverPhoto: doc.data().blogCoverPhoto,
 						blogTitle: doc.data().blogTitle,
-						blogDate: doc.data().blogDate,
+						blogDate: doc.data().date,
 					};
 					state.blogPosts.push(data);
 				}
 			});
 			state.postLoaded = true;
-			console.log(state.blogPosts);
 		},
 		async updateUserSettings({ commit, state }) {
 			const dataBase = await db.collection('users').doc(state.profileId);
